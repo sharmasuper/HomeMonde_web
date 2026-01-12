@@ -1,0 +1,44 @@
+.sliderContainer {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 60px 20px;
+  background-color: #03131d;
+  perspective: 1000px; /* needed for 3D tilt */
+}
+
+.card {
+  background: linear-gradient(135deg, #0b1a27, #041a27);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  width: 180px;
+  min-height: 120px;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: transform; /* better GPU performance */
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+}
+
+/* Animated gradient background */
+.card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+  background-position: 100% 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 1.5s ease;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.card p {
+  font-size: 12px;
+  color: #cfd8df;
+}
