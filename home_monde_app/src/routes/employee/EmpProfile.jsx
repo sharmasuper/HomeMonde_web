@@ -89,10 +89,7 @@ const EmpProfile = () => {
             <p style={ui.role}>{employee.role}</p>
           </div>
 
-          <button
-            style={ui.editBtn}
-            onClick={() => navigate("/employee/profile/edit")}
-          >
+          <button style={ui.editBtn} onClick={() => navigate("edit")}>
             {/* <FaUserEdit /> */}
             Edit
           </button>

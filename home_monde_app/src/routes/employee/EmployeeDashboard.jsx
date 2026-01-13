@@ -1,74 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 
 const EmployeeDashboard = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Later replace with API + JWT
-    setUser({
-      name: "Mohit Sharma",
-      email: "mohit@gmail.com",
-      role: "Employee",
-      lastLogin: "Today, 10:45 AM",
-    });
+    const fetchDashboard = async () => {
+      try {
+        const res = await api.get("/employee/dashboard"); // GET API
+        setDashboardData(res.data.dashboard); // store dashboard object
+        setLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch dashboard:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchDashboard();
   }, []);
 
-  if (!user) return null;
+  if (loading) return <p style={{ padding: "20px" }}>Loading dashboard...</p>;
+  if (!dashboardData)
+    return <p style={{ padding: "20px" }}>No dashboard data found.</p>;
 
   return (
     <div style={styles.page}>
       {/* Header */}
       <div style={styles.header}>
-        <h2 style={styles.heading}>Employee Dashboard</h2>
-        <span style={styles.roleBadge}>{user.role}</span>
+        <h2 style={styles.heading}>{dashboardData.welcomeText}</h2>
+        <span style={styles.roleBadge}>{dashboardData.role || "Employee"}</span>
       </div>
 
-      {/* Welcome Card */}
-      <div style={styles.profileCard}>
-        <h3 style={styles.welcome}>Welcome, {user.name} 👋</h3>
-
-        <div style={styles.infoGrid}>
-          <Info label="Email" value={user.email} />
-          <Info label="Last Login" value={user.lastLogin} />
-        </div>
-      </div>
-
-      {/* Action Cards */}
+      {/* Action Cards (from menus array) */}
       <div style={styles.cardsGrid}>
-        <ActionCard
-          title="My Profile"
-          desc="View & update your profile"
-          onClick={() => navigate("/employee/profile")}
-        />
-        <ActionCard
-          title="My Tasks"
-          desc="Check assigned tasks"
-          onClick={() => navigate("/employee/tasks")}
-        />
-        <ActionCard
-          title="Attendance"
-          desc="View attendance history"
-          onClick={() => navigate("/employee/attendance")}
-        />
-        <ActionCard
-          title="Settings"
-          desc="Account preferences"
-          onClick={() => navigate("/employee/settings")}
-        />
+        {dashboardData.menus.map((menu) => (
+          <ActionCard
+            key={menu._id}
+            title={menu.label}
+            desc={`Go to ${menu.label}`}
+            onClick={() => navigate(`/employee/${menu.path}`)}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
-const Info = ({ label, value }) => (
-  <div style={styles.infoRow}>
-    <span style={styles.label}>{label}</span>
-    <span style={styles.value}>{value}</span>
-  </div>
-);
-
+// Single Action Card
 const ActionCard = ({ title, desc, onClick }) => {
   const [hover, setHover] = useState(false);
 
@@ -91,6 +72,7 @@ const ActionCard = ({ title, desc, onClick }) => {
   );
 };
 
+// Styles
 const styles = {
   page: {
     minHeight: "100vh",
@@ -98,20 +80,17 @@ const styles = {
     background: "linear-gradient(180deg,#f8fbff,#eef3f9)",
     fontFamily: "system-ui, sans-serif",
   },
-
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "24px",
   },
-
   heading: {
     fontSize: "26px",
     fontWeight: "700",
     color: "#0f172a",
   },
-
   roleBadge: {
     background: "#2563eb",
     color: "#fff",
@@ -119,49 +98,11 @@ const styles = {
     borderRadius: "999px",
     fontSize: "14px",
   },
-
-  profileCard: {
-    background: "#fff",
-    borderRadius: "18px",
-    padding: "26px",
-    marginBottom: "32px",
-    boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
-  },
-
-  welcome: {
-    fontSize: "20px",
-    fontWeight: "600",
-    marginBottom: "18px",
-  },
-
-  infoGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "14px",
-  },
-
-  infoRow: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  label: {
-    fontSize: "14px",
-    color: "#64748b",
-  },
-
-  value: {
-    fontSize: "14px",
-    fontWeight: "500",
-    color: "#0f172a",
-  },
-
   cardsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))",
     gap: "20px",
   },
-
   card: {
     background: "#fff",
     borderRadius: "16px",
@@ -169,13 +110,11 @@ const styles = {
     cursor: "pointer",
     transition: "all 0.3s ease",
   },
-
   cardTitle: {
     fontSize: "18px",
     fontWeight: "600",
     marginBottom: "6px",
   },
-
   cardDesc: {
     fontSize: "14px",
     color: "#64748b",

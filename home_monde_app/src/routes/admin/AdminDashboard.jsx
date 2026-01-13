@@ -58,7 +58,11 @@ const AdminDashboard = () => {
             desc="View & manage employees"
           />
           <ActionCard title="Roles & Access" desc="Control permissions" />
-          <ActionCard title="Reports" desc="System activity reports" />
+          <ActionCard
+            title="Reports"
+            onClick={() => navigate("/admin/reports")}
+            desc="System activity reports"
+          />
           <ActionCard title="Settings" desc="Platform configuration" />
         </div>
       </div>
