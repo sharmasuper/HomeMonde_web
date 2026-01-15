@@ -20,6 +20,10 @@ import ReportsList from "./routes/employee/ReportsList";
 
 import DepartmentReports from "./routes/admin/reports/DepartmentReports";
 import AdminReports from "./routes/admin/reports/AdminReports";
+import CreateReports from "./routes/admin/reports/CreateReports";
+import EditReports from "./routes/admin/reports/EditReports";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +39,8 @@ function App() {
           {/* Auth */}
           <Route path="login" element={<Login />} />
           <Route path="signin" element={<SignIn />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password/:token" element={<ResetPassword />} />
 
           {/* 🔐 EMPLOYEE PROTECTED (ONE TIME) */}
           <Route
@@ -70,6 +76,8 @@ function App() {
               path="/admin/reports/:type"
               element={<DepartmentReports />}
             />
+            <Route path="/admin/reports/create" element={<CreateReports />} />
+            <Route path="/admin/reports/edit/:id" element={<EditReports />} />
             <Route path="settings" element={<div>settings</div>} />
           </Route>
         </Routes>

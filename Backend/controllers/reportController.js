@@ -22,6 +22,10 @@ export const updateReport = async (req, res) => {
   res.json(report);
 };
 
+export const getReportById = async (req, res) => {
+  const report = await Report.findById(req.params.id);
+  res.json(report);
+}
 // Delete report
 export const deleteReport = async (req, res) => {
   await Report.findByIdAndDelete(req.params.id);

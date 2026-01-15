@@ -5,6 +5,7 @@ import {
   deleteReport,
   getEmployeeReports,
   getAdminReports,
+  getReportById,
 } from "../controllers/reportController.js";
 
 import { authMiddleware } from "../middlewares/auth.middleware.js";
@@ -21,6 +22,7 @@ router.get(
 );
 
 router.post("/admin", authMiddleware, isAdmin, createReport);
+router.get("/admin/:id", authMiddleware, isAdmin, getReportById);
 router.put("/admin/:id", authMiddleware, isAdmin, updateReport);
 router.delete("/admin/:id", authMiddleware, isAdmin, deleteReport);
 

@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import { useAuth } from "../../context/AuthContext";
 
 const EmployeeDashboard = () => {
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { logout } = useAuth();
+  // 🔴 LOGOUT
+  const handleLogout = () => {
+    logout();
+  };
 
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await api.get("/employee/dashboard"); // GET API
-        setDashboardData(res.data.dashboard); // store dashboard object
+        const res = await api.get("/employee/dashboard");
+        setDashboardData(res.data.dashboard);
         setLoading(false);
       } catch (err) {
         console.error("Failed to fetch dashboard:", err);
@@ -31,10 +37,20 @@ const EmployeeDashboard = () => {
       {/* Header */}
       <div style={styles.header}>
         <h2 style={styles.heading}>{dashboardData.welcomeText}</h2>
-        <span style={styles.roleBadge}>{dashboardData.role || "Employee"}</span>
+
+        <div style={styles.headerRight}>
+          <span style={styles.roleBadge}>
+            {dashboardData.role || "Employee"}
+          </span>
+
+          {/* Logout */}
+          <span style={styles.logoutBtn} title="Logout" onClick={handleLogout}>
+            ⎋
+          </span>
+        </div>
       </div>
 
-      {/* Action Cards (from menus array) */}
+      {/* Action Cards */}
       <div style={styles.cardsGrid}>
         {dashboardData.menus.map((menu) => (
           <ActionCard
@@ -49,7 +65,7 @@ const EmployeeDashboard = () => {
   );
 };
 
-// Single Action Card
+// Action Card
 const ActionCard = ({ title, desc, onClick }) => {
   const [hover, setHover] = useState(false);
 
@@ -80,17 +96,26 @@ const styles = {
     background: "linear-gradient(180deg,#f8fbff,#eef3f9)",
     fontFamily: "system-ui, sans-serif",
   },
+
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "24px",
   },
+
+  headerRight: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+
   heading: {
     fontSize: "26px",
     fontWeight: "700",
     color: "#0f172a",
   },
+
   roleBadge: {
     background: "#2563eb",
     color: "#fff",
@@ -98,11 +123,27 @@ const styles = {
     borderRadius: "999px",
     fontSize: "14px",
   },
+
+  logoutBtn: {
+    width: "34px",
+    height: "34px",
+    borderRadius: "50%",
+    background: "#e2e8f0",
+    color: "#0f172a",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "600",
+  },
+
   cardsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))",
     gap: "20px",
   },
+
   card: {
     background: "#fff",
     borderRadius: "16px",
@@ -110,11 +151,13 @@ const styles = {
     cursor: "pointer",
     transition: "all 0.3s ease",
   },
+
   cardTitle: {
     fontSize: "18px",
     fontWeight: "600",
     marginBottom: "6px",
   },
+
   cardDesc: {
     fontSize: "14px",
     color: "#64748b",
