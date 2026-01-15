@@ -1,22 +1,10 @@
 import mongoose from "mongoose";
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
+
+const dashboardConfigSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["admin", "employee"],
-    default: "employee"
+    required: true
   },
   department: {
     type: String,
@@ -30,7 +18,17 @@ const userSchema = new mongoose.Schema({
       "Analytics"
     ],
     required: true
-  }
+  },
+  welcomeText: {
+    type: String
+  },
+  menus: [
+    {
+      label: String,
+      path: String,
+      icon: String
+    }
+  ]
 }, { timestamps: true });
 
-export default mongoose.model("User", userSchema);
+export default mongoose.model("DashboardConfig", dashboardConfigSchema);

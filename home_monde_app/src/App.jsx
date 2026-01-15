@@ -14,6 +14,12 @@ import EmpProfile from "./routes/employee/EmpProfile";
 import ProfileEdit from "./routes/employee/ProfileEdit";
 import EmployeeList from "./routes/admin/EmployeeList";
 import EmployeeDetails from "./routes/admin/EmployeeDetails";
+import ReportsPopup from "./routes/admin/reports/ReportsPopup";
+import EmpReports from "./routes/employee/EmpReports";
+import ReportsList from "./routes/employee/ReportsList";
+
+import DepartmentReports from "./routes/admin/reports/DepartmentReports";
+import AdminReports from "./routes/admin/reports/AdminReports";
 function App() {
   return (
     <BrowserRouter>
@@ -32,13 +38,15 @@ function App() {
 
           {/* 🔐 EMPLOYEE PROTECTED (ONE TIME) */}
           <Route
-            path="/employee"
+            path="/employee/:department"
             element={<ProtectedRoute allowedRoles={["employee"]} />}
           >
             <Route element={<EmployeeLayout />}>
               <Route path="dashboard" element={<EmployeeDashboard />} />
-              <Route path="profile" element={<EmpProfile />} />
-              <Route path="profile/edit" element={<ProfileEdit />} />
+              <Route path="employees" element={<EmpProfile />} />
+              <Route path="employees/edit" element={<ProfileEdit />} />
+              <Route path="reports" element={<EmpReports />} />
+              <Route path="reports/:type" element={<ReportsList />} />
               <Route path="tasks" element={<div>Tasks Page</div>} />
               <Route path="attendance" element={<div>Attendance Page</div>} />
               <Route path="settings" element={<div>Settings Page</div>} />
@@ -56,7 +64,12 @@ function App() {
             <Route path="employees/:id" element={<EmployeeDetails />} />
 
             <Route path="roles" element={<div>Roles</div>} />
-            <Route path="reports" element={<div>Reports</div>} />
+            {/* <Route path="reports" element={<ReportsPopup />} /> */}
+            <Route path="reports" element={<AdminReports />} />
+            <Route
+              path="/admin/reports/:type"
+              element={<DepartmentReports />}
+            />
             <Route path="settings" element={<div>settings</div>} />
           </Route>
         </Routes>

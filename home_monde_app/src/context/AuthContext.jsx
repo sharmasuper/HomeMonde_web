@@ -14,11 +14,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(data));
     // extra add
     localStorage.setItem("token", data.token);
+    // console.log("show data ", data);
 
     if (data.role === "admin") {
       navigate("/admin/dashboard");
     } else {
-      navigate("/employee/dashboard");
+      navigate(`/employee/${data.user.department}/dashboard`);
     }
   };
 
