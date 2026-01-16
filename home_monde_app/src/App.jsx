@@ -24,6 +24,7 @@ import CreateReports from "./routes/admin/reports/CreateReports";
 import EditReports from "./routes/admin/reports/EditReports";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import Contact from "./components/Contact/Contact";
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
             <Route index element={<Navigate to="/home" />} />
             <Route path="home" element={<Home />} />
             <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
           </Route>
 
           {/* Auth */}

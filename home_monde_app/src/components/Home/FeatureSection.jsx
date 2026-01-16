@@ -86,7 +86,7 @@ const FeatureSection = () => {
 
       <div className={styles.right}>
         <div className={styles.imageWrapper}>
-          <img src={TypebotImg} alt="Graphic" />
+          <img src="/Images/DAImg.png" alt="Graphic" />
         </div>
       </div>
     </div>

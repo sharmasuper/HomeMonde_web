@@ -21,14 +21,14 @@
 
 .imageWrapper {
   width: 100%;
-  max-width: 400px;
-  background: linear-gradient(180deg, #2e004f, #8b00ff);
-  padding: 20px;
+  max-width: 500px;
+  background: linear-gradient(180deg, #e6e5e7, #fffefd);
+  padding: 10px;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: float 3s ease-in-out infinite alternate;
+  /* animation: float 3s ease-in-out infinite alternate; */
 }
 
 .imageWrapper img {
