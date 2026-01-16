@@ -2,35 +2,36 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import api from "../../api/axios";
 
-// 🌍 Multi-language support
+/* 🌍 Language Support */
 const translations = {
   en: {
     welcome: "Create Your Account",
-    name: "Name",
-    email: "Email",
+    subtitle: "Join the internal workforce platform",
+    name: "Full Name",
+    email: "Work Email",
     password: "Password",
     role: "Role",
     department: "Department",
-    login: "Sign Up",
-    noAccount: "Already have an account?",
-    signup: "Please Login",
-    errorEmpty: "Please fill all fields!",
+    login: "Create Account",
+    noAccount: "Already registered?",
+    signup: "Login here",
+    errorEmpty: "Please fill all required fields",
   },
   es: {
     welcome: "Crea tu cuenta",
-    name: "Nombre",
-    email: "Correo electrónico",
+    subtitle: "Únete a la plataforma interna",
+    name: "Nombre completo",
+    email: "Correo laboral",
     password: "Contraseña",
     role: "Rol",
     department: "Departamento",
-    login: "Registrarse",
-    noAccount: "¿Ya tienes una cuenta?",
+    login: "Crear cuenta",
+    noAccount: "¿Ya estás registrado?",
     signup: "Inicia sesión",
-    errorEmpty: "¡Por favor complete todos los campos!",
+    errorEmpty: "Complete todos los campos",
   },
 };
 
-// 🏢 Fixed departments (industry standard)
 const departments = [
   "HR",
   "Sales",
@@ -45,7 +46,6 @@ const departments = [
 const SignIn = () => {
   const navigate = useNavigate();
 
-  // 🔹 form state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,10 +56,8 @@ const SignIn = () => {
 
   const t = translations[lang];
 
-  // 🔐 SIGNUP API
   const handleSignup = async (e) => {
     e.preventDefault();
-    // console.log("show department ", department);
 
     if (!name || !email || !password || !department) {
       setError(t.errorEmpty);
@@ -71,7 +69,7 @@ const SignIn = () => {
         name,
         email,
         password,
-        role: "employee", // 🔒 force role
+        role: "employee",
         department,
       });
 
@@ -82,233 +80,234 @@ const SignIn = () => {
     }
   };
 
-  // 🎨 styles (unchanged base)
+  /* 🎨 Ultra-polished MNC Styles */
   const styles = {
     container: {
+      minHeight: "100vh",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      minHeight: "100vh",
-      background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-      fontFamily: "'Roboto', sans-serif",
+      background: "radial-gradient(circle at top, #1e293b, #020617)",
+      fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
       padding: "1rem",
     },
+
     form: {
-      background: "rgba(255,255,255,0.95)",
-      padding: "2.5rem 2rem",
-      borderRadius: "20px",
-      boxShadow: "0 15px 40px rgba(0,0,0,0.3)",
       width: "100%",
-      maxWidth: "420px",
+      maxWidth: "440px",
+      padding: "3rem 2.8rem",
+      borderRadius: "20px",
+      background:
+        "linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05))",
+      backdropFilter: "blur(18px)",
+      boxShadow: "0 30px 60px rgba(0,0,0,0.6)",
+      color: "#f8fafc",
       position: "relative",
     },
-    langSwitcher: {
+
+    lang: {
       position: "absolute",
-      top: "15px",
-      right: "20px",
+      top: "20px",
+      right: "24px",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.08em",
       cursor: "pointer",
-      fontWeight: "600",
-      color: "#2575fc",
+      color: "#93c5fd",
     },
+
     title: {
-      textAlign: "center",
-      marginBottom: "2rem",
       fontSize: "2rem",
-      color: "#333",
+      fontWeight: 800,
+      textAlign: "center",
+      marginBottom: "0.3rem",
     },
-    inputGroup: {
+
+    subtitle: {
+      textAlign: "center",
+      fontSize: "0.9rem",
+      color: "#cbd5f5",
+      marginBottom: "2.5rem",
+    },
+
+    field: {
       position: "relative",
-      marginBottom: "1.6rem",
+      marginBottom: "1.7rem",
     },
+
     input: {
       width: "100%",
-      padding: "12px 10px",
-      fontSize: "1rem",
-      border: "2px solid #ddd",
-      borderRadius: "10px",
+      padding: "16px 14px",
+      borderRadius: "12px",
+      border: "1px solid rgba(255,255,255,0.25)",
+      background: "rgba(15,23,42,0.8)",
+      color: "#f8fafc",
+      fontSize: "0.95rem",
       outline: "none",
     },
+
     label: {
       position: "absolute",
-      top: "12px",
-      left: "12px",
-      color: "#aaa",
-      transition: "0.3s",
-      padding: "0 5px",
-    },
-    showPassword: {
-      position: "absolute",
-      right: "12px",
-      top: "12px",
-      cursor: "pointer",
-      color: "#2575fc",
+      left: "14px",
+      top: "50%",
+      transform: "translateY(-50%)",
       fontSize: "0.85rem",
+      color: "#94a3b8",
+      pointerEvents: "none",
+      transition: "0.25s ease",
+      background: "#020617",
+      padding: "0 6px",
     },
-    btn: {
-      width: "100%",
-      padding: "12px",
-      fontSize: "1rem",
-      fontWeight: 700,
-      color: "#fff",
-      background: "#2575fc",
-      border: "none",
-      borderRadius: "10px",
+
+    labelActive: {
+      top: "-8px",
+      fontSize: "0.7rem",
+      color: "#93c5fd",
+    },
+
+    show: {
+      position: "absolute",
+      right: "14px",
+      top: "16px",
+      fontSize: "0.7rem",
+      fontWeight: 600,
       cursor: "pointer",
+      color: "#93c5fd",
     },
+
+    button: {
+      width: "100%",
+      padding: "15px",
+      borderRadius: "14px",
+      border: "none",
+      fontWeight: 800,
+      fontSize: "0.95rem",
+      letterSpacing: "0.04em",
+      color: "#020617",
+      background: "linear-gradient(135deg, #93c5fd, #60a5fa)",
+      cursor: "pointer",
+      marginTop: "0.5rem",
+    },
+
     error: {
-      color: "red",
+      color: "#f87171",
       textAlign: "center",
+      fontSize: "0.8rem",
       marginBottom: "1rem",
     },
-    bottomText: {
+
+    footer: {
       textAlign: "center",
-      marginTop: "1.5rem",
+      fontSize: "0.8rem",
+      marginTop: "1.8rem",
+      color: "#c7d2fe",
     },
-    span: {
-      color: "#2575fc",
+
+    link: {
+      fontWeight: 700,
+      color: "#93c5fd",
       cursor: "pointer",
-      fontWeight: 600,
     },
   };
+
+  const active = (v) => (v ? styles.labelActive : {});
 
   return (
     <div style={styles.container}>
       <form style={styles.form} onSubmit={handleSignup}>
         <div
-          style={styles.langSwitcher}
+          style={styles.lang}
           onClick={() => setLang(lang === "en" ? "es" : "en")}
         >
           {lang.toUpperCase()}
         </div>
 
         <h2 style={styles.title}>{t.welcome}</h2>
+        <p style={styles.subtitle}>{t.subtitle}</p>
 
         {/* NAME */}
-        <div style={styles.inputGroup}>
+        <div style={styles.field}>
           <input
+            style={styles.input}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={styles.input}
           />
-          <label
-            style={{
-              ...styles.label,
-              top: name ? "-10px" : "12px",
-              fontSize: name ? "0.8rem" : "1rem",
-              background: name ? "#fff" : "transparent",
-            }}
-          >
-            {t.name}
-          </label>
+          <label style={{ ...styles.label, ...active(name) }}>{t.name}</label>
         </div>
 
         {/* EMAIL */}
-        <div style={styles.inputGroup}>
+        <div style={styles.field}>
           <input
             type="email"
+            style={styles.input}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
           />
-          <label
-            style={{
-              ...styles.label,
-              top: email ? "-10px" : "12px",
-              fontSize: email ? "0.8rem" : "1rem",
-              background: email ? "#fff" : "transparent",
-            }}
-          >
-            {t.email}
-          </label>
+          <label style={{ ...styles.label, ...active(email) }}>{t.email}</label>
         </div>
 
-        {/* ROLE (DISABLED) */}
-        <div style={styles.inputGroup}>
+        {/* ROLE */}
+        <div style={styles.field}>
           <input
-            value="Employee"
             disabled
+            value="Employee"
             style={{
               ...styles.input,
-              background: "#f3f3f3",
+              background: "rgba(148,163,184,0.15)",
               cursor: "not-allowed",
             }}
           />
-          <label
-            style={{
-              ...styles.label,
-              top: "-10px",
-              fontSize: "0.8rem",
-              background: "#fff",
-            }}
-          >
+          <label style={{ ...styles.label, ...styles.labelActive }}>
             {t.role}
           </label>
         </div>
 
         {/* DEPARTMENT */}
-        <div style={styles.inputGroup}>
+        <div style={styles.field}>
           <select
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
             style={styles.input}
           >
             <option value="">Select Department</option>
-            {departments.map((dep) => (
-              <option key={dep} value={dep}>
-                {dep}
-              </option>
+            {departments.map((d) => (
+              <option key={d}>{d}</option>
             ))}
           </select>
-          <label
-            style={{
-              ...styles.label,
-              top: department ? "-10px" : "12px",
-              fontSize: department ? "0.8rem" : "1rem",
-              background: department ? "#fff" : "transparent",
-            }}
-          >
+          <label style={{ ...styles.label, ...active(department) }}>
             {t.department}
           </label>
         </div>
 
         {/* PASSWORD */}
-        <div style={styles.inputGroup}>
+        <div style={styles.field}>
           <input
             type={showPassword ? "text" : "password"}
+            style={styles.input}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
           />
-          <label
-            style={{
-              ...styles.label,
-              top: password ? "-10px" : "12px",
-              fontSize: password ? "0.8rem" : "1rem",
-              background: password ? "#fff" : "transparent",
-            }}
-          >
+          <label style={{ ...styles.label, ...active(password) }}>
             {t.password}
           </label>
           <span
-            style={styles.showPassword}
+            style={styles.show}
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? "HIDE" : "SHOW"}
           </span>
         </div>
 
-        {error && <p style={styles.error}>{error}</p>}
+        {error && <div style={styles.error}>{error}</div>}
 
-        <button type="submit" style={styles.btn}>
-          {t.login}
-        </button>
+        <button style={styles.button}>{t.login}</button>
 
-        <p style={styles.bottomText}>
+        <div style={styles.footer}>
           {t.noAccount}{" "}
-          <span style={styles.span} onClick={() => navigate("/login")}>
+          <span style={styles.link} onClick={() => navigate("/login")}>
             {t.signup}
           </span>
-        </p>
+        </div>
       </form>
     </div>
   );

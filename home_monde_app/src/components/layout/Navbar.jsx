@@ -1,33 +1,41 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "../../styles/Navbar.module.css";
-import { NavLink } from "react-router";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+
   const links = [
     { name: "Home", path: "/home" },
     { name: "About", path: "/about" },
     { name: "Login", path: "/login" },
     { name: "Contact", path: "/contact" },
   ];
+
   return (
     <header className={styles.navbar}>
       <div className={styles.container}>
-        {/* Logo */}
+        {/* LOGO */}
         <div className={styles.logo}>
-          <span className={styles.icon}></span>
-          <div>
-            <h1>HOMEMONDE</h1>
-            <small>LIFESTYLE</small>
+          <img
+            src="/Images/Homemonde_Logoo.webp"
+            alt="HomeMonde"
+            className={styles.logoImg}
+          />
+
+          <div className={styles.brandText}>
+            <h2>HomeMonde</h2>
+            <span>Lifestyle</span>
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* NAV LINKS */}
         <nav className={`${styles.navLinks} ${open ? styles.active : ""}`}>
           {links.map((link, index) => (
             <NavLink
               key={index}
               to={link.path}
+              onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 isActive ? styles.activeLink : styles.link
               }
@@ -37,14 +45,14 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Hamburger */}
+        {/* HAMBURGER */}
         <div
           className={`${styles.hamburger} ${open ? styles.open : ""}`}
           onClick={() => setOpen(!open)}
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span />
+          <span />
+          <span />
         </div>
       </div>
     </header>

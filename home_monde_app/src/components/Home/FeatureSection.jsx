@@ -1,33 +1,35 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import styles from "../../styles/FeatureSection.module.css";
-import TypebotImg from "../../assets/TypebotImg.png"; // replace with your image
+
+/* ===== DATA (Data Analyst Website) ===== */
 
 const accordionData = [
   {
-    title: "Effortless building experience",
-    desc: "Our platform allows developers to build projects quickly and efficiently with minimal setup and intuitive tools.",
+    title:
+      "What is the role of the Data Analytics team at Homemonde Lifestyle?",
+    desc: "The Data Analytics team enables data-driven decision-making by transforming raw data into actionable insights across sales, operations, finance, supply chain, and workforce management.",
   },
   {
-    title: "Extensive chat capabilities",
-    desc: "Engage with AI-powered chat features that provide real-time assistance, suggestions, and conversation handling.",
+    title: "Which departments does the analytics team support?",
+    desc: "We work closely with Sales, Marketing, Finance, Operations, Manufacturing, HR, and Leadership, ensuring each function has accurate and timely insights.",
   },
   {
-    title: "Designed for human delight",
-    desc: "Every interaction is crafted to be enjoyable and intuitive, making complex workflows feel simple and fun.",
+    title: "What type of reports and dashboards are created?",
+    desc: "We develop executive dashboards, operational reports, cost & profitability analysis, performance trackers, and trend analysis tailored to business priorities.",
   },
   {
-    title: "Made with love for developers",
-    desc: "We prioritize developer experience, ensuring all tools are flexible, customizable, and powerful.",
+    title: "What tools and platforms are used by the analytics team?",
+    desc: "Our primary tools include Power BI, Microsoft Excel, SQL, and automation workflows, selected based on data volume, reporting frequency, and business needs.",
   },
   {
-    title: "Continuously evolving technology",
-    desc: "Typebot's technology is constantly evolving, with regular updates that include bug fixes, new features, and performance enhancements.",
+    title: "5. How often are dashboards and reports updated?",
+    desc: "Depending on the use case, reports are updated daily, weekly, monthly, or in real-time, ensuring stakeholders always work with the latest data.",
   },
 ];
 
 const FeatureSection = () => {
-  const [activeIndex, setActiveIndex] = useState(4);
+  const [activeIndex, setActiveIndex] = useState(0);
   const accordionRefs = useRef([]);
 
   useEffect(() => {
@@ -54,14 +56,15 @@ const FeatureSection = () => {
 
   return (
     <div className={styles.featureSection}>
+      {/* LEFT SIDE - ACCORDION */}
       <div className={styles.left}>
         {accordionData.map((item, index) => (
           <div
+            key={index}
+            ref={(el) => (accordionRefs.current[index] = el)}
             className={`${styles.accordionItem} ${
               activeIndex === index ? styles.active : ""
             }`}
-            key={index}
-            ref={(el) => (accordionRefs.current[index] = el)}
           >
             <button
               className={styles.accordionHeader}
@@ -72,6 +75,7 @@ const FeatureSection = () => {
                 {activeIndex === index ? "▲" : "▼"}
               </span>
             </button>
+
             <div
               className={styles.accordionContent}
               style={{
@@ -84,9 +88,10 @@ const FeatureSection = () => {
         ))}
       </div>
 
+      {/* RIGHT SIDE - IMAGE */}
       <div className={styles.right}>
         <div className={styles.imageWrapper}>
-          <img src={TypebotImg} alt="Graphic" />
+          <img src="/Images/DAImg.png" alt="Data Analytics Illustration" />
         </div>
       </div>
     </div>

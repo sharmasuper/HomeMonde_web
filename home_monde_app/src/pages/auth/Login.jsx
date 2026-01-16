@@ -4,18 +4,17 @@ import api from "../../api/axios";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
-  const { login } = useAuth(); // ✅ auth brain
-  const navigate = useNavigate(); // only for signup link
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // 🔥 animation hook
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       setError("Please fill all fields!");
       return;
@@ -26,140 +25,138 @@ const Login = () => {
       setLoading(true);
 
       const res = await api.post("/auth/login", { email, password });
+      console.log("show res", res);
 
-      // ✅ single source of truth
       login({
         token: res.data.token,
         role: res.data.user.role,
         user: res.data.user,
       });
+      setLoading(false);
+      // navigate("/admin/dashboard"); // Navigate after login
     } catch (err) {
+      console.log("show err ", err);
       setError(err.response?.data?.message || "Login failed");
       setLoading(false);
     }
   };
 
-  /* ===== YOUR STYLES (UNCHANGED) ===== */
+  /* ===== STYLES ===== */
   const styles = {
     container: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #6a11cb, #2575fc)",
-      fontFamily: "'Roboto', sans-serif",
+      background: "linear-gradient(135deg, #0f172a, #1e293b)",
+      fontFamily: "Inter, system-ui, sans-serif",
       padding: "1rem",
     },
     form: {
-      background: "rgba(255,255,255,0.95)",
-      padding: "2.5rem 2rem",
-      borderRadius: "20px",
-      boxShadow: "0 15px 40px rgba(0,0,0,0.3)",
+      background: "#ffffff",
+      padding: "2.4rem 2rem",
+      borderRadius: "18px",
+      boxShadow: "0 25px 60px rgba(0,0,0,0.35)",
       width: "100%",
-      maxWidth: "400px",
-
-      /* 🔥 animation magic */
-      animation: "fadeSlideIn 0.7s ease-out",
-      transformOrigin: "center",
+      maxWidth: "420px",
+      animation: "fadeSlideIn 0.6s ease-out",
     },
     title: {
       textAlign: "center",
+      marginBottom: "0.4rem",
+      fontSize: "1.9rem",
+      fontWeight: "700",
+      color: "#0f172a",
+    },
+    subtitle: {
+      textAlign: "center",
+      fontSize: "0.9rem",
+      color: "#64748b",
       marginBottom: "2rem",
-      fontSize: "2rem",
-      color: "#333",
     },
-    inputGroup: {
-      position: "relative",
-      marginBottom: "1.8rem",
-    },
+    inputGroup: { position: "relative", marginBottom: "1.6rem" },
     input: {
       width: "100%",
-      padding: "12px 10px",
-      fontSize: "1rem",
-      border: "2px solid #ddd",
+      padding: "16px 12px 8px 12px",
+      fontSize: "0.95rem",
+      border: "1.8px solid #d1d5db",
       borderRadius: "10px",
       outline: "none",
-      transition: "border 0.3s, box-shadow 0.3s",
+      transition: "all 0.25s ease",
     },
-    label: {
+    label: (active) => ({
       position: "absolute",
-      top: "12px",
       left: "12px",
-      color: "#aaa",
+      top: active ? "4px" : "16px",
+      fontSize: active ? "0.75rem" : "0.85rem",
+      color: "#9ca3af",
       pointerEvents: "none",
       transition: "0.3s",
-      padding: "0 5px",
-    },
+      background: "#fff",
+      padding: "0 4px",
+    }),
     showPassword: {
       position: "absolute",
       right: "12px",
       top: "12px",
       cursor: "pointer",
-      color: "#2575fc",
+      color: "#2563eb",
+      fontSize: "0.8rem",
+      fontWeight: "500",
+    },
+    forgotRow: {
+      display: "flex",
+      justifyContent: "flex-end",
+      marginBottom: "1.4rem",
+    },
+    forgot: {
       fontSize: "0.85rem",
+      color: "#2563eb",
+      cursor: "pointer",
+      fontWeight: "500",
     },
     btn: {
       width: "100%",
       padding: "12px",
       fontSize: "1rem",
-      fontWeight: 700,
+      fontWeight: 600,
       color: "#fff",
-      background: "#2575fc",
+      background: "linear-gradient(135deg, #2563eb, #1d4ed8)",
       border: "none",
       borderRadius: "10px",
       cursor: "pointer",
       transition: "all 0.3s ease",
-      transform: loading ? "scale(0.96)" : "scale(1)",
       opacity: loading ? 0.7 : 1,
     },
     error: {
-      color: "red",
-      fontSize: "0.9rem",
+      color: "#dc2626",
+      fontSize: "0.85rem",
       marginBottom: "1rem",
       textAlign: "center",
       animation: "shake 0.4s",
     },
     bottomText: {
       textAlign: "center",
-      marginTop: "1.5rem",
-      color: "#555",
+      marginTop: "1.8rem",
+      fontSize: "0.9rem",
+      color: "#475569",
     },
-    span: {
-      color: "#2575fc",
-      cursor: "pointer",
-      fontWeight: 600,
-    },
+    span: { color: "#2563eb", cursor: "pointer", fontWeight: "600" },
   };
 
   return (
     <>
-      {/* 🔥 Global animations */}
       <style>
         {`
-          @keyframes fadeSlideIn {
-            from {
-              opacity: 0;
-              transform: translateY(25px) scale(0.95);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
-
-          @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-4px); }
-            50% { transform: translateX(4px); }
-            75% { transform: translateX(-4px); }
-            100% { transform: translateX(0); }
-          }
+          @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+          @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-4px); } 100% { transform: translateX(0); } }
         `}
       </style>
 
       <div style={styles.container}>
         <form style={styles.form} onSubmit={handleLogin}>
           <h2 style={styles.title}>Welcome Back</h2>
+          <p style={styles.subtitle}>Sign in to continue</p>
 
           <div style={styles.inputGroup}>
             <input
@@ -168,9 +165,8 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               style={styles.input}
-              placeholder=" "
             />
-            <label style={styles.label}>Email</label>
+            <label style={styles.label(email)}>Email address</label>
           </div>
 
           <div style={styles.inputGroup}>
@@ -180,14 +176,22 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               style={styles.input}
-              placeholder=" "
             />
-            <label style={styles.label}>Password</label>
+            <label style={styles.label(password)}>Password</label>
             <span
               style={styles.showPassword}
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show"}
+            </span>
+          </div>
+
+          <div style={styles.forgotRow}>
+            <span
+              style={styles.forgot}
+              onClick={() => navigate("/forgot-password")}
+            >
+              Forgot password?
             </span>
           </div>
 
@@ -198,7 +202,7 @@ const Login = () => {
           </button>
 
           <p style={styles.bottomText}>
-            Don't have an account?{" "}
+            Don’t have an account?{" "}
             <span style={styles.span} onClick={() => navigate("/signin")}>
               Sign Up
             </span>

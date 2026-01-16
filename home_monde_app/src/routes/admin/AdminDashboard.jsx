@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  // 🔴 LOGOUT HANDLER
+  const handleLogout = () => {
+    logout();
+  };
 
   // Fake API (replace later)
   useEffect(() => {
@@ -37,7 +44,15 @@ const AdminDashboard = () => {
           <h2 style={styles.heading}>Admin Dashboard</h2>
           <p style={styles.subHeading}>System overview & controls</p>
         </div>
-        <span style={styles.adminBadge}>Admin</span>
+
+        <div style={styles.headerRight}>
+          <span style={styles.adminBadge}>Admin</span>
+
+          {/* Logout */}
+          <span style={styles.logoutBtn} title="Logout" onClick={handleLogout}>
+            ⎋
+          </span>
+        </div>
       </div>
 
       {/* Stats */}
@@ -54,14 +69,14 @@ const AdminDashboard = () => {
         <div style={styles.actionGrid}>
           <ActionCard
             title="Employees"
-            onClick={() => navigate("/admin/employees")}
             desc="View & manage employees"
+            onClick={() => navigate("/admin/employees")}
           />
           <ActionCard title="Roles & Access" desc="Control permissions" />
           <ActionCard
             title="Reports"
-            onClick={() => navigate("/admin/reports")}
             desc="System activity reports"
+            onClick={() => navigate("/admin/reports")}
           />
           <ActionCard title="Settings" desc="Platform configuration" />
         </div>
@@ -93,7 +108,7 @@ const ActionCard = ({ title, desc, onClick }) => {
 
   return (
     <div
-      onClick={onClick} // 👈 THIS IS THE KEY
+      onClick={onClick}
       style={{
         ...styles.actionCard,
         transform: hover ? "translateY(-6px)" : "translateY(0)",
@@ -127,6 +142,12 @@ const styles = {
     marginBottom: "35px",
   },
 
+  headerRight: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+  },
+
   heading: {
     fontSize: "30px",
     fontWeight: "700",
@@ -145,6 +166,18 @@ const styles = {
     borderRadius: "22px",
     fontSize: "14px",
     fontWeight: "500",
+  },
+
+  logoutBtn: {
+    width: "38px",
+    height: "38px",
+    borderRadius: "50%",
+    background: "rgba(255,255,255,0.08)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    fontSize: "18px",
   },
 
   statsGrid: {
