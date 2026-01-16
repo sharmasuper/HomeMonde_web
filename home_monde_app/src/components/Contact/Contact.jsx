@@ -6,11 +6,11 @@ const Contact = () => {
       {/* Hero */}
       <section style={styles.hero}>
         <h1 style={styles.heroTitle}>
-          Trusted Textile Manufacturing & Innovation Partner
+          Turning Data into Reliable Business Insights
         </h1>
         <p style={styles.heroSubtitle}>
-          Delivering quality, scale, and reliability across global textile
-          markets.
+          Delivering accurate insights, scalable analytics, and reliable data
+          solutions.
         </p>
       </section>
 
@@ -32,9 +32,9 @@ const Contact = () => {
         <div style={styles.column}>
           <h2 style={styles.heading}>Business Enquiries</h2>
           <p style={styles.text}>
-            care@homemonde.com
+            pushgautam2002@gmail.com
             <br />
-            WhatsApp:+91 8233008561
+            WhatsApp:+91 7062809588
           </p>
         </div>
 
@@ -47,9 +47,9 @@ const Contact = () => {
       {/* Statement */}
       <section style={styles.statement}>
         <p style={styles.statementText}>
-          With decades of expertise in textile manufacturing, processing, and
-          exports, we partner with global brands to deliver consistency,
-          compliance, and innovation at scale.
+          With strong expertise in data analysis, visualization, and reporting,
+          we help organizations transform raw data into accurate, compliant, and
+          scalable insights.
         </p>
       </section>
     </div>
@@ -63,8 +63,12 @@ export default Contact;
 const styles = {
   page: {
     minHeight: "100vh",
-    backgroundColor: "#f7f6f2",
-    color: "#1f2933",
+    backgroundColor: "#050503", // fallback color
+    // backgroundImage: "url('/Images/19187756.jpg')", // your background image
+    backgroundSize: "cover", // makes the image cover the whole container
+    backgroundPosition: "center", // centers the image
+    backgroundRepeat: "no-repeat", // prevents tiling
+    color: "#f0f4f7",
     fontFamily: "'Playfair Display', 'Inter', serif",
     padding: "80px 10%",
   },
@@ -83,14 +87,14 @@ const styles = {
   heroSubtitle: {
     fontSize: "20px",
     lineHeight: "1.6",
-    color: "#4b5563",
+    color: "#f1f3f6",
     maxWidth: "700px",
   },
 
   divider: {
     width: "120px",
     height: "2px",
-    backgroundColor: "#9ca3af",
+    backgroundColor: "#f0f2f7",
     margin: "60px 0",
   },
 
@@ -110,13 +114,13 @@ const styles = {
     letterSpacing: "2px",
     textTransform: "uppercase",
     marginBottom: "14px",
-    color: "#6b7280",
+    color: "#f3f5f7",
   },
 
   text: {
     fontSize: "17px",
     lineHeight: "1.7",
-    color: "#1f2933",
+    color: "#f5f8fb",
   },
 
   statement: {
@@ -128,6 +132,6 @@ const styles = {
   statementText: {
     fontSize: "22px",
     lineHeight: "1.7",
-    color: "#374151",
+    color: "#f7f9fd",
   },
 };

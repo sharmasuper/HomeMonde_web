@@ -11,15 +11,21 @@ const Footer = () => {
 
         <ul className={styles.navLinks}>
           <li>
-            <NavLink to="/home">HOME</NavLink>
+            <NavLink style={{ color: "white" }} to="/home">
+              HOME
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/about">ABOUT</NavLink>
+            <NavLink style={{ color: "white" }} to="/about">
+              ABOUT
+            </NavLink>
           </li>
           {/* <li>STRATEGY</li>
           <li>PROPERTIES</li> */}
           <li>
-            <NavLink to="/about">CONTACT</NavLink>
+            <NavLink style={{ color: "white" }} to="/contact">
+              CONTACT
+            </NavLink>
           </li>
         </ul>
       </div>

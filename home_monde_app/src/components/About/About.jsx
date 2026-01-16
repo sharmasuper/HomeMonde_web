@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/About.module.css";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-/* ====== DATA (kept outside component for optimization) ====== */
+import { NavLink } from "react-router-dom";
+
+/* ====== DATA (optimized & reusable) ====== */
 
 const skills = [
   "Data Cleaning",
@@ -19,13 +20,46 @@ const tools = [
   "Tableau",
   "Excel",
   "Google Analytics",
+  "Jupyter Notebooks",
 ];
 
 const stats = [
-  { value: "50+", label: "Projects Completed" },
-  { value: "10+", label: "Dashboards Built" },
-  { value: "3+", label: "Years Experience" },
+  { value: 23, suffix: "+", label: "Projects Completed" },
+  { value: 13, suffix: "+", label: "Dashboards Built" },
+  { value: 10, suffix: "+", label: "PPT & PDF" },
 ];
+
+/* ====== COUNTER COMPONENT (inside same file) ====== */
+
+const Counter = ({ end, suffix = "", duration = 2000 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const increment = Math.ceil(end / (duration / 16));
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [end, duration]);
+
+  return (
+    <>
+      {count}
+      {suffix}
+    </>
+  );
+};
+
+/* ====== ABOUT PAGE ====== */
 
 function About() {
   return (
@@ -36,8 +70,8 @@ function About() {
           Turning <span>Data</span> into <span>Insights</span>
         </h1>
         <p>
-          I’m a Data Analyst who helps businesses make smarter decisions using
-          data, dashboards, and actionable insights.
+          We enable organizations to make informed decisions using reliable
+          data, analytics, and visualization.
         </p>
       </section>
 
@@ -45,7 +79,9 @@ function About() {
       <section className={styles.stats}>
         {stats.map((stat, index) => (
           <div key={index} className={styles.statCard}>
-            <h2>{stat.value}</h2>
+            <h2>
+              <Counter end={stat.value} suffix={stat.suffix} />
+            </h2>
             <p>{stat.label}</p>
           </div>
         ))}
@@ -55,22 +91,22 @@ function About() {
       <section className={styles.content}>
         {/* LEFT TEXT */}
         <div className={styles.text}>
-          <h2>Who I Am</h2>
+          <h2>Who We Are</h2>
           <p>
-            I specialize in analyzing complex datasets and transforming raw
-            numbers into meaningful stories. My focus is on clarity, accuracy,
-            and business impact.
+            We specialize in analyzing complex datasets and transforming raw
+            data into meaningful insights, with a strong focus on clarity,
+            accuracy, and business impact.
           </p>
           <p>
-            From dashboards to performance insights, I love solving real-world
-            problems using data.
+            We deliver dashboards and performance insights that address
+            real-world business challenges through data.
           </p>
         </div>
 
         {/* RIGHT CARDS */}
         <div className={styles.cards}>
           <div className={styles.card}>
-            <h3>📊 What I Do</h3>
+            <h3>📊 What We Do</h3>
             <ul className={styles.tagList}>
               {skills.map((skill, index) => (
                 <li key={index}>{skill}</li>
@@ -79,7 +115,7 @@ function About() {
           </div>
 
           <div className={styles.card}>
-            <h3>🛠 Tools I Use</h3>
+            <h3>🛠 Tools We Use</h3>
             <ul className={styles.tagList}>
               {tools.map((tool, index) => (
                 <li key={index}>{tool}</li>

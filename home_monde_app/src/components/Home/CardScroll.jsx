@@ -3,30 +3,30 @@ import gsap from "gsap";
 
 const cardsData = [
   {
-    title: "Manufacturing",
-    desc: "Advanced textile production facilities",
-    img: "/Images/manufacturing.webp",
+    title: "COGS",
+    desc: "Clear insight into costs driving SKU profitability",
+    img: "/Images/COGS.png",
   },
   {
-    title: "Design",
-    desc: "Innovative fabric & fashion concepts",
-    img: "https://images.unsplash.com/photo-1520975682031-a7a9da32bb6e",
+    title: "HRMS",
+    desc: "Actionable insights into workforce structure and spend",
+    img: "/Images/HRMS.png",
   },
   {
-    title: "Strategy",
-    desc: "Scalable growth & export planning",
-    img: "https://images.unsplash.com/photo-1492724441997-5dc865305da7",
+    title: "RETURN",
+    desc: "Analyze product returns to improve quality decisions",
+    img: "/Images/RETURN.png",
   },
   {
-    title: "Quality",
-    desc: "Precision testing & quality assurance",
-    img: "https://images.unsplash.com/photo-1581091870627-3b8c6f0d25c1",
+    title: "DPR",
+    desc: "Real-time visibility into daily production performance",
+    img: "/Images/DPR.png",
   },
-  {
-    title: "Global Reach",
-    desc: "Worldwide textile distribution",
-    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
-  },
+  // {
+  //   title: "",
+  //   desc: "Worldwide textile distribution",
+  //   img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+  // },
 ];
 
 const CardSlider = () => {
@@ -54,7 +54,7 @@ const CardSlider = () => {
     <section className="card-slider">
       {/* BACKGROUND IMAGE (IMG TAG ONLY) */}
       <img
-        src="/Images/19187756.jpg"
+        src="/Images/back2.png"
         alt="Background"
         className="card-slider__bg"
       />
@@ -64,10 +64,10 @@ const CardSlider = () => {
 
       {/* HEADING */}
       <div className="card-slider__heading">
-        <h2>Explore Our Platform</h2>
+        <h2>Explore Our Analytics Capabilities</h2>
         <p>
-          Modern textile manufacturing powered by innovation, quality & global
-          vision
+          Modern data analytics powered by innovation, accuracy, and a global
+          perspective.
         </p>
       </div>
 
@@ -157,7 +157,7 @@ const CardSlider = () => {
 
         .card-slider__card {
           min-width: 220px;
-          background: rgba(255, 255, 255, 0.35);
+          background: rgba(45, 47, 45, 0.41);
           border-radius: 20px;
           overflow: hidden;
           backdrop-filter: blur(8px);
