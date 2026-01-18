@@ -4,6 +4,7 @@ import CardSlider from "../components/Home/CardScroll";
 import FeatureSection from "../components/Home/FeatureSection";
 import HomeScroll from "../components/Home/HomeScroll";
 import AdvancedScroll from "../components/Home/AdvancedScroll";
+import HthirdCom from "../components/Home/HthirdCom";
 
 // import HomeScroll from "../components/Home/HomeScroll";
 
@@ -15,6 +16,7 @@ function Home() {
       {/* <AdvancedScroll /> */}
       <CardSlider />
       <FeatureSection />
+      <HthirdCom />
     </>
   );
 }

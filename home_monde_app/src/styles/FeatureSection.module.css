@@ -6,7 +6,8 @@
   padding: 80px 20px;
   flex-wrap: wrap;
   color: #e5e7eb;
-   background-image: url("/Images/BackImage.png");
+   background-image: url("/Images/back3R.png");
+   /* url("/Images/BackImage.png"); */
   background-color: cover;
   background-position: center;
   overflow: hidden; /* ensures pseudo-element doesn't overflow */
@@ -16,7 +17,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/Images/BackImage.png");
+  background-image: url("/Images/back3R.png");
   background-color: cover;
   background-position: center;
   opacity: 0.95;
