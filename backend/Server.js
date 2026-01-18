@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5173", // React Vite
+  origin: "https://home-monde-3f13miob7-mohit-full-stack-developers-projects.vercel.app", // React Vite
   credentials: true
 }));
 app.use(express.json());
